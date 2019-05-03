@@ -1,0 +1,28 @@
+
+public class SecondExercise {
+
+	public static int remainder;
+	public static int factor;
+	/*@
+	@ normal_behavior
+	@ requires a>=0  && b>0 && a<10 && b<10;
+	@ ensures remainder + (b * factor) == a && remainder < b;
+	@*/
+	public static void modulo(int a, int b) {
+		int _a = a;
+		
+		int f = 0;
+
+		/* @ 
+		   @ loop_invariant _a + (f * b) == a && b > 0 && b < 10 && _a >= 0 && a < 10 && ;
+		   @ decreases _a;
+		   @ */
+		while (_a > 0) {
+			f = f + 1;
+			_a = _a - b;
+		}
+		
+		remainder = _a;
+		factor = f;
+	}
+}

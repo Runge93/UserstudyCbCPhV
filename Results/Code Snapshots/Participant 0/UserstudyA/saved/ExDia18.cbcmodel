@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cbcmodel="http://www.example.org/cbcmodel">
+  <cbcmodel:CbCFormula name="FirstExercise">
+    <statement name="statement">
+      <refinement xsi:type="cbcmodel:SmallRepetitionStatement" name="repetitionStatement">
+        <postCondition name="\forall int q; ((q >= 0 &amp; q &lt; a.length) -> a[i]>=a[q])"/>
+        <preCondition name="a.length >0"/>
+        <loopStatement name="loop">
+          <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+            <firstStatement name="statement1">
+              <refinement xsi:type="cbcmodel:SelectionStatement" name="selectionStatement">
+                <guards name="a[j] > a[i]"/>
+                <guards name="a[j] &lt;= a[i]"/>
+                <commands name="statement1">
+                  <refinement name="i = j;">
+                    <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+                    <preCondition name="(((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)) &amp; (a[j] > a[i])"/>
+                  </refinement>
+                  <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+                  <preCondition name="(((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)) &amp; (a[j] > a[i])"/>
+                </commands>
+                <commands name="statement2">
+                  <refinement name=";" proven="true">
+                    <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+                    <preCondition name="(((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)) &amp; (a[j] &lt;= a[i])"/>
+                  </refinement>
+                  <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+                  <preCondition name="(((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)) &amp; (a[j] &lt;= a[i])"/>
+                </commands>
+              </refinement>
+              <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+              <preCondition name="((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)"/>
+            </firstStatement>
+            <secondStatement name="statement2">
+              <refinement name="j++;">
+                <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))"/>
+                <preCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+              </refinement>
+              <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))"/>
+              <preCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+            </secondStatement>
+            <intermediateCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt;= j) -> (a[k] &lt;= a[i]))) &amp; (j &lt; a.length)"/>
+          </refinement>
+          <postCondition name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))"/>
+          <preCondition name="((\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))) &amp; (j &lt; a.length)"/>
+        </loopStatement>
+        <variant name="variant"/>
+        <invariant name="(\forall int k; (&#xA;(k >= 0 &amp; k &lt; j) -> (a[k] &lt;= a[i])))"/>
+        <guard name="j &lt; a.length"/>
+      </refinement>
+      <postCondition name="\forall int q; ((q >= 0 &amp; q &lt; a.length) -> a[i]>=a[q])"/>
+      <preCondition name="a.length >0"/>
+    </statement>
+  </cbcmodel:CbCFormula>
+  <cbcmodel:JavaVariables>
+    <variables name="int[] a"/>
+    <variables name="int i"/>
+    <variables name="int j"/>
+  </cbcmodel:JavaVariables>
+  <cbcmodel:GlobalConditions>
+    <conditions name="a != null"/>
+    <conditions name="a.length > 0"/>
+    <conditions name="j >= 0"/>
+    <conditions name="j &lt;= a.length"/>
+    <conditions name="i >= 0"/>
+    <conditions name="i &lt; a.length"/>
+  </cbcmodel:GlobalConditions>
+</xmi:XMI>

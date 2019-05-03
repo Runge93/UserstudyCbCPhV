@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cbcmodel="http://www.example.org/cbcmodel">
+  <cbcmodel:CbCFormula name="SecondExercise">
+    <statement name="statement">
+      <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+        <firstStatement name="statement1">
+          <refinement name="f = 0; r = 0; factor = 0; remainder = 0;" proven="true">
+            <postCondition name="f = 0 &amp; r = 0 &amp; factor = 0 &amp; remainder = 0"/>
+            <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+          </refinement>
+          <postCondition name="f = 0 &amp; r = 0 &amp; factor = 0 &amp; remainder = 0"/>
+          <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+        </firstStatement>
+        <secondStatement name="statement2">
+          <refinement xsi:type="cbcmodel:SmallRepetitionStatement" name="repetitionStatement">
+            <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+            <preCondition name="f = 0 &amp; r = 0 &amp; factor = 0 &amp; remainder = 0"/>
+            <loopStatement name="loop">
+              <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+                <firstStatement name="statement1">
+                  <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+                    <firstStatement name="statement1">
+                      <refinement name="r = a - (b * f);">
+                        <postCondition name="r = a - (b * f)"/>
+                        <preCondition name="(r + (b * f) &lt;= a) &amp; (r + (b * f) &lt;= a)"/>
+                      </refinement>
+                      <postCondition name="r = a - (b * f)"/>
+                      <preCondition name="(r + (b * f) &lt;= a) &amp; (r + (b * f) &lt;= a)"/>
+                    </firstStatement>
+                    <secondStatement name="statement2">
+                      <refinement xsi:type="cbcmodel:SelectionStatement" name="selectionStatement">
+                        <guards name="r + (b * f) = a"/>
+                        <guards name="r + (b * f) != a"/>
+                        <commands name="statement1">
+                          <refinement name="remainder = f; factor = f;">
+                            <postCondition name="intermediateCond"/>
+                            <preCondition name="(r = a - (b * f)) &amp; (r + (b * f) = a)"/>
+                          </refinement>
+                          <postCondition name="intermediateCond"/>
+                          <preCondition name="(r = a - (b * f)) &amp; (r + (b * f) = a)"/>
+                        </commands>
+                        <commands name="statement2">
+                          <refinement xsi:type="cbcmodel:SkipStatement" name=";">
+                            <postCondition name="intermediateCond"/>
+                            <preCondition name="(r = a - (b * f)) &amp; (r + (b * f) != a)"/>
+                          </refinement>
+                          <postCondition name="intermediateCond"/>
+                          <preCondition name="(r = a - (b * f)) &amp; (r + (b * f) != a)"/>
+                        </commands>
+                      </refinement>
+                      <postCondition name="intermediateCond"/>
+                      <preCondition name="r = a - (b * f)"/>
+                    </secondStatement>
+                    <intermediateCondition name="r = a - (b * f)"/>
+                  </refinement>
+                  <postCondition name="intermediateCond"/>
+                  <preCondition name="(r + (b * f) &lt;= a) &amp; (r + (b * f) &lt;= a)"/>
+                </firstStatement>
+                <secondStatement name="statement2">
+                  <refinement name="f = f + 1;">
+                    <postCondition name="r + (b * f) &lt;= a"/>
+                    <preCondition name="intermediateCond"/>
+                  </refinement>
+                  <postCondition name="r + (b * f) &lt;= a"/>
+                  <preCondition name="intermediateCond"/>
+                </secondStatement>
+                <intermediateCondition name="intermediateCond"/>
+              </refinement>
+              <postCondition name="r + (b * f) &lt;= a"/>
+              <preCondition name="(r + (b * f) &lt;= a) &amp; (r + (b * f) &lt;= a)"/>
+            </loopStatement>
+            <variant name="10 - f"/>
+            <invariant name="r + (b * f) &lt;= a"/>
+            <guard name="r + (b * f) &lt;= a"/>
+          </refinement>
+          <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+          <preCondition name="f = 0 &amp; r = 0 &amp; factor = 0 &amp; remainder = 0"/>
+        </secondStatement>
+        <intermediateCondition name="f = 0 &amp; r = 0 &amp; factor = 0 &amp; remainder = 0"/>
+      </refinement>
+      <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+      <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+    </statement>
+  </cbcmodel:CbCFormula>
+  <cbcmodel:GlobalConditions>
+    <conditions name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+  </cbcmodel:GlobalConditions>
+  <cbcmodel:JavaVariables>
+    <variables name="int a"/>
+    <variables name="int b"/>
+    <variables name="int remainder"/>
+    <variables name="int factor"/>
+    <variables name="int f"/>
+    <variables name="int r"/>
+  </cbcmodel:JavaVariables>
+</xmi:XMI>

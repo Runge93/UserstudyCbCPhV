@@ -1,0 +1,21 @@
+
+public class FirstExercise {
+
+	/*@
+	@ normal_behavior
+	@ requires a.length > 0;
+	@ ensures (\forall int q; q >= 0 & q < a.length; a[\result]>=a[q]);
+	@*/
+	public static int maxElement(int[] a) {
+		int maxIndex = 0;
+		/*@ loop_invariant (\forall int q; q >= i & q <= a.length-1; a[maxIndex]>=a[q]) && i >= 0 && maxIndex >= i && maxIndex >= 0;
+		  @ decreases i;
+		  @*/
+		for (int i = a.length-1; i >= 0; i--) {
+			if (a[i] > a[maxIndex]) {
+				maxIndex = i;
+			}
+		}
+		return maxIndex;
+	}
+}

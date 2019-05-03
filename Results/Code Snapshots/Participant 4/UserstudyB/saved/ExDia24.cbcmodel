@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="ASCII"?>
+<xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:cbcmodel="http://www.example.org/cbcmodel">
+  <cbcmodel:CbCFormula name="SecondExercise">
+    <statement name="statement">
+      <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+        <firstStatement name="statement1">
+          <refinement xsi:type="cbcmodel:CompositionStatement" name="compositionStatement">
+            <firstStatement name="statement1">
+              <refinement name="factor = 0; remainder = 0;" proven="true">
+                <postCondition name="factor=0 &amp; remainder = 0"/>
+                <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+              </refinement>
+              <postCondition name="factor=0 &amp; remainder = 0"/>
+              <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+            </firstStatement>
+            <secondStatement name="statement2">
+              <refinement xsi:type="cbcmodel:SmallRepetitionStatement" name="repetitionStatement">
+                <postCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+                <preCondition name="factor=0 &amp; remainder = 0"/>
+                <loopStatement name="loop">
+                  <refinement name="factor++;">
+                    <postCondition name="a - remainder >= b * factor"/>
+                    <preCondition name="(a - remainder >= b * factor) &amp; (a > b* (factor + 1))"/>
+                  </refinement>
+                  <postCondition name="a - remainder >= b * factor"/>
+                  <preCondition name="(a - remainder >= b * factor) &amp; (a > b* (factor + 1))"/>
+                </loopStatement>
+                <variant name="a - b*factor"/>
+                <invariant name="a - remainder >= b * factor"/>
+                <guard name="a > b* (factor + 1)"/>
+              </refinement>
+              <postCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+              <preCondition name="factor=0 &amp; remainder = 0"/>
+            </secondStatement>
+            <intermediateCondition name="factor=0 &amp; remainder = 0"/>
+          </refinement>
+          <postCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+          <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+        </firstStatement>
+        <secondStatement name="statement2">
+          <refinement name="remainder = a - b * factor;" proven="true">
+            <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+            <preCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+          </refinement>
+          <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+          <preCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+        </secondStatement>
+        <intermediateCondition name="a - remainder &lt;= b * factor &amp; remainder &lt; b"/>
+      </refinement>
+      <postCondition name="remainder + (b * factor) = a &amp; remainder &lt; b"/>
+      <preCondition name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+    </statement>
+  </cbcmodel:CbCFormula>
+  <cbcmodel:GlobalConditions>
+    <conditions name="a>=0  &amp; b>0 &amp; a&lt;10 &amp; b&lt;10"/>
+  </cbcmodel:GlobalConditions>
+  <cbcmodel:JavaVariables>
+    <variables name="int a"/>
+    <variables name="int b"/>
+    <variables name="int remainder"/>
+    <variables name="int factor"/>
+  </cbcmodel:JavaVariables>
+</xmi:XMI>
