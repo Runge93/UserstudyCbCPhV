@@ -1,5 +1,6 @@
 # UserstudyCbCPhV
-The data of the first user study is organized in four folders.
+
+## The data of the first user study is organized in four folders.
 
 Exercises: 
 * Pdfs with the exercise description. The users had to implement and verify two algorithms.
@@ -21,7 +22,7 @@ Results:
 * The result of the programming experience questionnaire.
 * Graphs of the evaluation of the intermediate code snapshots.
 
-##The data of the second user study is organized in three folders.
+## The data of the second user study is organized in three folders.
 
 Exercises: 
 * Pdfs with the exercise description. The users had to implement and verify two algorithms.
